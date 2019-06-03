@@ -1,0 +1,14 @@
+# Logs
+logs
+*.log
+
+# Editor files
+.vscode
+
+# Extra folders
+node_modules
+
+# Extra files
+package-lock.json
+yarn.lock
+npm-debug.log

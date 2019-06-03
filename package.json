@@ -1,0 +1,10 @@
+{
+  "name": "mongoose-cli",
+  "version": "1.0.0",
+  "description": "A command line interface (CLI) for Mongoose",
+  "main": "./src/mongoose.js",
+  "repository": "https://github.com/waptik/mongoose-cli.git",
+  "author": "waptik <itswaptik@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
