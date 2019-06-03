@@ -1,0 +1,28 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"targets": {
+					"node": true
+				},
+				"exclude": [
+					"@babel/plugin-transform-async-to-generator"
+					//"@babel/plugin-transform-regenerator"
+				],
+				"useBuiltIns": "entry"
+			}
+		]
+	],
+	"plugins": [
+		"@babel/plugin-proposal-object-rest-spread",
+		[
+			"@babel/plugin-transform-async-to-generator",
+			{
+				"module": "bluebird",
+				"method": "coroutine"
+			}
+		]
+	],
+	"ignore": ["./src/assets"]
+}
