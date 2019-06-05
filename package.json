@@ -3,13 +3,23 @@
 	"version": "1.0.0",
 	"description": "A command line interface (CLI) for Mongoose",
 	"main": "./src/mongoose.js",
-	"repository": "https://github.com/waptik/mongoose-cli.git",
+	"homepage": "https://github.com/waptik/mongoose-cli",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/waptik/mongoose-cli.git"
+	},
 	"author": "waptik <itswaptik@gmail.com>",
 	"license": "MIT",
 	"private": false,
 	"bugs": {
 		"url": "https://github.com/waptik/mongoose-cli/issues"
 	},
+	"keywords": [
+		"mongoose",
+		"cli",
+		"mongodb",
+		"migrations"
+	],
 	"dependencies": {
 		"bluebird": "^3.5.5",
 		"cli-color": "^1.4.0",
