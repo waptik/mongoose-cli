@@ -11,6 +11,5 @@ src
 
 # Extra files
 package-lock.json
-yarn.lock
 npm-debug.log
 yarn-error.log
