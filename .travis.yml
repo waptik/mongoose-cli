@@ -1,5 +1,12 @@
-
+sudo: true
+dist: trusty
 
 language: node_js
 
 cache: yarn
+
+install:
+  - npm install -g yarn
+
+script:
+  - yarn test
