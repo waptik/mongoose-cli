@@ -127,39 +127,41 @@ export function addTimestampsToSchema(migrator) {
       return;
     }
 
-    return ensureCurrentMetaSchema(connection, migrator)
-      .then(() =>
-        connection.db.collection(collectionName).rename(collectionName + 'Backup', (err, res) => {
-          console.log('Collection renamed successfully. ', res);
-        }),
-      )
-      .then(() => {
-        const sql = connection.QueryGenerator.selectQuery(collectionName + 'Backup');
-        return helpers.generic.execQuery(sequelize, sql, { type: 'SELECT', raw: true });
-      })
-      .then(result => {
-        const schema = new Schema(
-          {
-            name: {
-              type: 'string',
-              unique: true,
+    return (
+      ensureCurrentMetaSchema(connection, migrator)
+        .then(() =>
+          connection.db.collection(collectionName).rename(collectionName + 'Backup', (err, res) => {
+            console.log('Collection renamed successfully. ', res);
+          }),
+        )
+        // .then(() => {
+        //   const sql = connection.QueryGenerator.selectQuery(collectionName + 'Backup');
+        //   return helpers.generic.execQuery(sequelize, sql, { type: 'SELECT', raw: true });
+        // })
+        .then(result => {
+          const schema = new Schema(
+            {
+              name: {
+                type: 'string',
+                unique: true,
+              },
             },
-          },
-          {
-            // schema options
-            collection: collectionName,
-          },
-        );
-        const MongooseMeta = connection.model(collectionName, schema, {
-          timestamps: true,
-          schema: helpers.umzug.getSchema(),
-        });
+            {
+              // schema options
+              collection: collectionName,
+            },
+          );
+          const MongooseMeta = connection.model(collectionName, schema, {
+            timestamps: true,
+            schema: helpers.umzug.getSchema(),
+          });
 
-        //MongooserMeta.validateSync();
+          //MongooserMeta.validateSync();
 
-        return MongooseMeta.sync().then(() => {
-          return MongooseMeta.bulkCreate(result);
-        });
-      });
+          return MongooseMeta.sync().then(() => {
+            return MongooseMeta.bulkCreate(result);
+          });
+        })
+    );
   });
 }
