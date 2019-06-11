@@ -7,8 +7,9 @@ logs
 
 # Extra folders
 node_modules
-lib
-src
+libs
+tests
+src/assets
 
 # Extra files
 package-lock.json
