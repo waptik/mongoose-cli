@@ -41,7 +41,7 @@
 		"gulp": "^4.0.2",
 		"jest": "^24.8.0",
 		"mocha": "^6.1.4",
-		"mongoose": "^5.5.12",
+		"mongoose": "^5.5.15",
 		"through2": "^3.0.1"
 	},
 	"engines": {
