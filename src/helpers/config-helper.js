@@ -69,22 +69,30 @@ const api = {
       JSON.stringify(
         {
           development: {
-            username: 'root',
-            password: null,
-            database: 'database_development',
-            host: '127.0.0.1',
+            database: {
+              url: 'mongodb://localhost/mongoose_dev',
+              config: {
+                useNewUrlParser: true,
+              },
+            },
           },
           test: {
-            username: 'root',
-            password: null,
-            database: 'database_test',
-            host: '127.0.0.1',
+            url: 'mongodb://localhost/mongoose_test',
+            config: {
+              useNewUrlParser: true,
+            },
           },
           production: {
+            protocol: 'mongodb',
             username: 'root',
-            password: null,
-            database: 'database_production',
-            host: '127.0.0.1',
+            password: 'password',
+            name: 'database_development',
+            host: 'localhost',
+            port: '',
+            config: {
+              useNewUrlParser: true,
+              //dbName: "" // uncomment this line if you use something like mongo atlas
+            },
           },
         },
         undefined,
@@ -144,9 +152,9 @@ const api = {
     return api.config;
   },
 
-  filteredUrl(uri, config) {
+  filteredUrl(url, config) {
     const regExp = new RegExp(':?' + _.escapeRegExp(config.password) + '@');
-    return uri.replace(regExp, ':*****@');
+    return url.replace(regExp, ':*****@');
   },
 
   urlStringToConfigHash(urlString) {
@@ -157,7 +165,6 @@ const api = {
         host: urlParts.hostname,
         port: urlParts.port,
         protocol: urlParts.protocol.replace(/:$/, ''),
-        ssl: urlParts.query ? urlParts.query.indexOf('ssl=true') >= 0 : false,
       };
 
       if (urlParts.auth) {

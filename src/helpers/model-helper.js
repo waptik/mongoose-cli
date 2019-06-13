@@ -84,8 +84,6 @@ module.exports = {
     return helpers.template.render('models/model.js', {
       name: args.name,
       attributes: this.transformAttributes(args.attributes),
-      underscored: args.underscored,
-      timestamps: args.timestamps,
     });
   },
 

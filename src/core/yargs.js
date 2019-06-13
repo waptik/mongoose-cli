@@ -54,14 +54,6 @@ export function _baseOptions(yargs) {
     });
 }
 
-export function _timestampsOption(yargs) {
-  return yargs.option('timestamps', {
-    describe: 'enable the use of timestamp collection names',
-    default: false,
-    type: 'boolean',
-  });
-}
-
 export function _underscoreOption(yargs) {
   return yargs.option('underscored', {
     describe: "Use snake case for the timestamp's attribute names",

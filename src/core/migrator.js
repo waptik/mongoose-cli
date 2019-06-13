@@ -1,7 +1,7 @@
 import Umzug from 'umzug';
 import Bluebird from 'bluebird';
 import _ from 'lodash';
-
+import { resolve } from 'path';
 import helpers from '../helpers/index';
 
 // let's get the mongoose package if installed on the user's machine
@@ -50,7 +50,7 @@ export function getMigrator(type, args) {
       const sOptions = {};
       sOptions.connection = connection;
       new Umzug({
-        storage: helpers.umzug.getStorage(type),
+        storage: resolve(__dirname, 'storage'),
         storageOptions: helpers.umzug.getStorageOptions(type, sOptions),
         logging: helpers.view.log,
         migrations: {
@@ -102,7 +102,7 @@ function ensureMetaTable(connection, collectionName) {
         });
 
         if (array.indexOf(collectionName) === -1) {
-          throw new Error('No MetaTable table found.');
+          throw new Error('No Migration collection found.');
         }
       })
     )

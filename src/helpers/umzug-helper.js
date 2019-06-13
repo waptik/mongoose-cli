@@ -2,12 +2,10 @@ import _ from 'lodash';
 import helpers from './index';
 
 const storage = {
-  migration: 'mongodb',
-  seeder: 'none',
+  migration: 'mongoose',
 };
 const storageCollectionName = {
   migration: 'mongoose_migrations_meta',
-  seeder: 'mongoose_seeder_data',
 };
 
 module.exports = {

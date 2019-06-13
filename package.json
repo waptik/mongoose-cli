@@ -14,19 +14,11 @@
   "bugs": {
     "url": "https://github.com/waptik/mongoose-cli/issues"
   },
-  "keywords": [
-    "mongoose",
-    "cli",
-    "mongodb",
-    "migrations"
-  ],
+  "keywords": ["mongoose", "cli", "mongodb", "migrations"],
   "options": {
     "mocha": "--require scripts/mocha-bootload.js --check-leaks --exit --timeout 30000 --colors --reporter spec"
   },
-  "eslintIgnore": [
-    "test/support",
-    "src/assets"
-  ],
+  "eslintIgnore": ["test/support", "src/assets"],
   "scripts": {
     "build": "npm run build-clean && babel src -d lib && npm run build-bin && npm run build-assets",
     "build-bin": "mv ./lib/mongoose.js ./lib/mongoose && chmod +x ./lib/mongoose",
@@ -37,7 +29,7 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:quiet": "npm run lint -- --quiet",
     "pretest": "npm run lint:quiet && npm run prettier:check",
-    "test": "npm run lint && npm run build && npm run test-raw",
+    "test": "npm run prettier",
     "prettier": "prettier \"src/**/*.js\" \"test/**/*.js\"",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --list-different"
@@ -76,9 +68,6 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   }
 }

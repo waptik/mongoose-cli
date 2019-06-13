@@ -6,8 +6,8 @@ module.exports = {
     return helpers.template.render('migrations/create-table.js', {
       tableName: this.getTableName(args.name),
       attributes: helpers.model.transformAttributes(args.attributes),
-      createdAt: args.underscored ? 'created_at' : 'createdAt',
-      updatedAt: args.underscored ? 'updated_at' : 'updatedAt',
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
     });
   },
 

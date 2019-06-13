@@ -1,5 +1,5 @@
 import { _baseOptions } from '../core/yargs';
-import { getMigrator, ensureCurrentMetaSchema, addTimestampsToSchema } from '../core/migrator';
+import { getMigrator, ensureCurrentMetaSchema } from '../core/migrator';
 
 import helpers from '../helpers';
 import _ from 'lodash';
@@ -24,9 +24,6 @@ exports.handler = async function(args) {
   switch (command) {
     case 'db:migrate':
       await migrate(args);
-      break;
-    case 'db:migrate:schema:timestamps:add':
-      await migrateSchemaTimestampAdd(args);
       break;
     case 'db:migrate:status':
       await migrationStatus(args);
@@ -84,20 +81,6 @@ function migrationStatus(args) {
             helpers.view.log('down', migration.file);
           });
         });
-    })
-    .catch(e => helpers.view.error(e));
-}
-
-function migrateSchemaTimestampAdd(args) {
-  return getMigrator('migration', args)
-    .then(migrator => {
-      return addTimestampsToSchema(migrator).then(items => {
-        if (items) {
-          helpers.view.log('Successfully added timestamps to MetaTable.');
-        } else {
-          helpers.view.log('MetaTable already has timestamps.');
-        }
-      });
     })
     .catch(e => helpers.view.error(e));
 }
