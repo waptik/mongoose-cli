@@ -7,8 +7,10 @@ module.exports = (mongoose) => {
       <%= (Object.keys(attributes).length - 1) > index ? ',' : '' %>
     <% }) %>
   }, {
-    <%= timestamps ? '(`${underscored} ? (timestamps: { createdAt: 'created_at', updatedAt: 'update_at' }) : timestamps: true,`)' : '' %>
-  }
+    timestamps: {
+      createdAt: 'created_at', 
+      updatedAt: 'update_at'
+     }
   });
 
 

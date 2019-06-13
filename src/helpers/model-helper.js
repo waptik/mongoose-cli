@@ -1,6 +1,20 @@
 import helpers from './index';
 
+const Mongoose = helpers.generic.getMongoose();
+
 const validAttributeFunctionType = ['array', 'enum'];
+
+/**
+ * Check the given dataType actual exists.
+ * @param {string} dataType
+ */
+function validateDataType(dataType) {
+  if (!Mongoose.Schema.Types.dataType) {
+    throw new Error(`Unknown type '${dataType}'`);
+  }
+
+  return dataType;
+}
 
 function formatAttributes(attribute) {
   let result;
