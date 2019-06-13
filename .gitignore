@@ -9,7 +9,7 @@ logs
 node_modules
 libs
 tests
-src/assets
+#src/assets
 
 # Extra files
 package-lock.json
