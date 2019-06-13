@@ -12,7 +12,6 @@ export default class MongooseStorage {
    * @param {String} [options.collection] - reference to a MongoDB Driver collection
    */
   constructor({ connection, collectionName, collection }) {
-    super();
     this.connection = connection;
     this.collection = collection;
     this.collectionName = collectionName || 'migrations';
