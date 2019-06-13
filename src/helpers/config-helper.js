@@ -77,21 +77,25 @@ const api = {
             },
           },
           test: {
-            url: 'mongodb://localhost/mongoose_test',
-            config: {
-              useNewUrlParser: true,
+            database: {
+              url: 'mongodb://localhost/mongoose_test',
+              config: {
+                useNewUrlParser: true,
+              },
             },
           },
           production: {
-            protocol: 'mongodb',
-            username: 'root',
-            password: 'password',
-            name: 'database_development',
-            host: 'localhost',
-            port: '',
-            config: {
-              useNewUrlParser: true,
-              //dbName: "" // uncomment this line if you use something like mongo atlas
+            database: {
+              protocol: 'mongodb',
+              username: 'root',
+              password: 'password',
+              name: 'database_production',
+              host: 'localhost',
+              port: '',
+              config: {
+                useNewUrlParser: true,
+                //dbName: "" // uncomment this line if you use something like mongo atlas
+              },
             },
           },
         },
@@ -165,6 +169,7 @@ const api = {
         host: urlParts.hostname,
         port: urlParts.port,
         protocol: urlParts.protocol.replace(/:$/, ''),
+        ssl: urlParts.query ? urlParts.query.indexOf('ssl=true') >= 0 : false,
       };
 
       if (urlParts.auth) {
@@ -181,9 +186,7 @@ const api = {
   },
 
   parseDbUrl(urlString) {
-    const config = api.urlStringToConfigHash(urlString);
-
-    return config;
+    return api.urlStringToConfigHash(urlString);
   },
 };
 

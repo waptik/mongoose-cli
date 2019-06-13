@@ -102,66 +102,10 @@ function ensureMetaTable(connection, collectionName) {
         });
 
         if (array.indexOf(collectionName) === -1) {
-          throw new Error('No Migration collection found.');
+          throw new Error('No Collection for migraions found.');
         }
       })
     )
-      return schemaPaths(res, collectionName);
-  });
-}
-
-function schemaPaths(connection, collectionName) {}
-
-/**
- * Add timestamps
- *
- * @return {Promise}
- */
-export function addTimestampsToSchema(migrator) {
-  const connection = migrator.options.storageOptions.connection.connection;
-  const collectionName = migrator.options.storageOptions.collectionName;
-  const Schema = mongoose.Schema;
-
-  return ensureMetaTable(collectionName).then(collection => {
-    if (collection.createdAt || collection.created_at) {
       return;
-    }
-
-    return (
-      ensureCurrentMetaSchema(connection, migrator)
-        .then(() =>
-          connection.db.collection(collectionName).rename(collectionName + 'Backup', (err, res) => {
-            console.log('Collection renamed successfully. ', res);
-          }),
-        )
-        // .then(() => {
-        //   const sql = connection.QueryGenerator.selectQuery(collectionName + 'Backup');
-        //   return helpers.generic.execQuery(sequelize, sql, { type: 'SELECT', raw: true });
-        // })
-        .then(result => {
-          const schema = new Schema(
-            {
-              name: {
-                type: 'string',
-                unique: true,
-              },
-            },
-            {
-              // schema options
-              collection: collectionName,
-            },
-          );
-          const MongooseMeta = connection.model(collectionName, schema, {
-            timestamps: true,
-            schema: helpers.umzug.getSchema(),
-          });
-
-          //MongooserMeta.validateSync();
-
-          return MongooseMeta.sync().then(() => {
-            return MongooseMeta.bulkCreate(result);
-          });
-        })
-    );
   });
 }
