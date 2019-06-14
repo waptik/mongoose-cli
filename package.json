@@ -1,8 +1,10 @@
 {
-  "name": "mongoose-cli",
+  "name": "mongoose-cmd",
   "version": "1.0.0",
   "description": "A command line interface (CLI) for Mongoose",
-  "main": "./src/mongoose.js",
+  "bin": {
+    "mongoose": "./src/mongoose.js"
+  },
   "homepage": "https://github.com/waptik/mongoose-cli",
   "repository": {
     "type": "git",
@@ -14,23 +16,31 @@
   "bugs": {
     "url": "https://github.com/waptik/mongoose-cli/issues"
   },
-  "keywords": ["mongoose", "cli", "mongodb", "migrations"],
+  "keywords": [
+    "mongoose",
+    "cli",
+    "mongodb",
+    "migrations"
+  ],
   "options": {
     "mocha": "--require scripts/mocha-bootload.js --check-leaks --exit --timeout 30000 --colors --reporter spec"
   },
-  "eslintIgnore": ["test/support", "src/assets"],
+  "eslintIgnore": [
+    "test/support",
+    "src/assets"
+  ],
   "scripts": {
     "build": "npm run build-clean && babel src -d lib && npm run build-bin && npm run build-assets",
     "build-bin": "mv ./lib/mongoose.js ./lib/mongoose && chmod +x ./lib/mongoose",
     "build-assets": "cp -R ./src/assets ./lib/",
     "build-clean": "rm -rf ./lib/",
-    "lint": "eslint test src",
-    "test-raw": "jest 'test/**/*.test.js'",
+    "lint": "eslint src",
     "lint:fix": "npm run lint -- --fix",
     "lint:quiet": "npm run lint -- --quiet",
+    "test:report": "jest",
     "pretest": "npm run lint:quiet && npm run prettier:check",
-    "test": "npm run prettier",
-    "prettier": "prettier \"src/**/*.js\" \"test/**/*.js\"",
+    "test": " yarn test:report && npm run lint && npm run build",
+    "prettier": "prettier \"**/*.@(js|json|md)\" --ignore-path .eslintignore",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --list-different"
   },
@@ -52,11 +62,11 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "eslint": "^5.16.0",
-    "gulp": "^4.0.2",
     "husky": "^2.4.0",
     "jest": "^24.8.0",
     "lint-staged": "^8.2.0",
     "mongoose": "^5.5.12",
+    "node-emoji": "^1.10.0",
     "prettier": "^1.17.1"
   },
   "engines": {
@@ -68,6 +78,9 @@
     }
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

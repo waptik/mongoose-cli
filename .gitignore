@@ -9,6 +9,7 @@ logs
 node_modules
 libs
 tests
+lib
 #src/assets
 
 # Extra files
