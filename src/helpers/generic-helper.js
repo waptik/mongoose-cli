@@ -30,7 +30,7 @@ const generic = {
     }
 
     return require(mongoosePath);
-  },
+  }
 };
 
 module.exports = generic;

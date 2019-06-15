@@ -25,7 +25,7 @@ const assets = {
 
   mkdirp: pathToCreate => {
     fs.mkdirpSync(pathToCreate);
-  },
+  }
 };
 
 module.exports = assets;

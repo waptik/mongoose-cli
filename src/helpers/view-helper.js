@@ -14,7 +14,7 @@ module.exports = {
     ];
 
     this.log();
-    this.log(clc.underline('Sequelize CLI [' + versions.join(', ') + ']'));
+    this.log(clc.underline('Mongoosee CLI [' + versions.join(', ') + ']'));
     this.log();
   },
 
@@ -34,6 +34,14 @@ module.exports = {
     this.log();
 
     process.exit(1);
+  },
+
+  info(message) {
+    this.log(`${clc.underline('INFO:')} ${message}`);
+  },
+
+  ok(message) {
+    this.log(`${clc.green('SUCCESS:')} ${message}`);
   },
 
   warn(message) {

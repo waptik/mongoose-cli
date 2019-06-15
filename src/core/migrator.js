@@ -7,13 +7,13 @@ import helpers from '../helpers/index';
 // let's get the mongoose package if installed on the user's machine
 const Mongoose = helpers.generic.getMongoose();
 
-export function logMigrator(s) {
+export function logMigrator (s) {
   if (s.indexOf('Executing') !== 0) {
     helpers.view.log(s);
   }
 }
 
-function getMongooseInstance() {
+function getMongooseInstance () {
   let config = null;
 
   try {
@@ -35,7 +35,7 @@ function getMongooseInstance() {
 // mongoose instance things related
 const mongoose = getMongooseInstance();
 
-export function getMigrator(type, args) {
+export function getMigrator (type, args) {
   return Bluebird.try(() => {
     if (!(helpers.config.configFileExists() || args.url)) {
       helpers.view.error(
@@ -63,8 +63,8 @@ export function getMigrator(type, args) {
             } else {
               return fun;
             }
-          },
-        },
+          }
+        }
       });
     };
 
@@ -72,7 +72,7 @@ export function getMigrator(type, args) {
   });
 }
 
-export function ensureCurrentMetaSchema(migrator) {
+export function ensureCurrentMetaSchema (migrator) {
   const connection = migrator.options.storageOptions.connection.connection;
   const collectionName = migrator.options.storageOptions.collectionName;
 
@@ -87,7 +87,7 @@ export function ensureCurrentMetaSchema(migrator) {
     .catch(() => {});
 }
 
-function ensureMetaTable(connection, collectionName) {
+function ensureMetaTable (connection, collectionName) {
   const array = [];
 
   return connection.then(res => {

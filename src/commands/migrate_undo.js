@@ -6,10 +6,10 @@ import helpers from '../helpers';
 exports.builder = yargs =>
   _baseOptions(yargs).option('name', {
     describe: 'Name of the migration to undo',
-    type: 'string',
+    type: 'string'
   }).argv;
 
-exports.handler = async function(args) {
+exports.handler = async function (args) {
   // legacy, gulp used to do this
   await helpers.config.init();
 
@@ -18,7 +18,7 @@ exports.handler = async function(args) {
   process.exit(0);
 };
 
-function migrateUndo(args) {
+function migrateUndo (args) {
   return getMigrator('migration', args)
     .then(migrator => {
       return ensureCurrentMetaSchema(migrator)

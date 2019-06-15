@@ -12,7 +12,7 @@ const api = {
   config: undefined,
   rawConfig: undefined,
   error: undefined,
-  init() {
+  init () {
     return Bluebird.resolve()
       .then(() => {
         let config;
@@ -45,7 +45,7 @@ const api = {
         return api;
       });
   },
-  getConfigFile() {
+  getConfigFile () {
     if (args.config) {
       return path.resolve(process.cwd(), args.config);
     }
@@ -56,15 +56,15 @@ const api = {
     return helpers.path.existsSync(alternativePath) ? alternativePath : defaultPath;
   },
 
-  relativeConfigFile() {
+  relativeConfigFile () {
     return path.relative(process.cwd(), api.getConfigFile());
   },
 
-  configFileExists() {
+  configFileExists () {
     return helpers.path.existsSync(api.getConfigFile());
   },
 
-  getDefaultConfig() {
+  getDefaultConfig () {
     return (
       JSON.stringify(
         {
@@ -72,17 +72,17 @@ const api = {
             database: {
               url: 'mongodb://localhost/mongoose_dev',
               config: {
-                useNewUrlParser: true,
-              },
-            },
+                useNewUrlParser: true
+              }
+            }
           },
           test: {
             database: {
               url: 'mongodb://localhost/mongoose_test',
               config: {
-                useNewUrlParser: true,
-              },
-            },
+                useNewUrlParser: true
+              }
+            }
           },
           production: {
             database: {
@@ -93,11 +93,11 @@ const api = {
               host: 'localhost',
               port: '',
               config: {
-                useNewUrlParser: true,
+                useNewUrlParser: true
                 //dbName: "" // uncomment this line if you use something like mongo atlas
-              },
-            },
-          },
+              }
+            }
+          }
         },
         undefined,
         2,
@@ -105,7 +105,7 @@ const api = {
     );
   },
 
-  writeDefaultConfig() {
+  writeDefaultConfig () {
     const configPath = path.dirname(api.getConfigFile());
 
     if (!helpers.path.existsSync(configPath)) {
@@ -115,7 +115,7 @@ const api = {
     fs.writeFileSync(api.getConfigFile(), api.getDefaultConfig());
   },
 
-  readConfig() {
+  readConfig () {
     if (!api.config) {
       const env = helpers.generic.getEnvironment();
 
@@ -156,12 +156,12 @@ const api = {
     return api.config;
   },
 
-  filteredUrl(url, config) {
+  filteredUrl (url, config) {
     const regExp = new RegExp(':?' + _.escapeRegExp(config.password) + '@');
     return url.replace(regExp, ':*****@');
   },
 
-  urlStringToConfigHash(urlString) {
+  urlStringToConfigHash (urlString) {
     try {
       const urlParts = url.parse(urlString);
       let result = {
@@ -169,13 +169,13 @@ const api = {
         host: urlParts.hostname,
         port: urlParts.port,
         protocol: urlParts.protocol.replace(/:$/, ''),
-        ssl: urlParts.query ? urlParts.query.indexOf('ssl=true') >= 0 : false,
+        ssl: urlParts.query ? urlParts.query.indexOf('ssl=true') >= 0 : false
       };
 
       if (urlParts.auth) {
         result = _.assign(result, {
           username: urlParts.auth.split(':')[0],
-          password: urlParts.auth.split(':')[1],
+          password: urlParts.auth.split(':')[1]
         });
       }
 
@@ -185,9 +185,9 @@ const api = {
     }
   },
 
-  parseDbUrl(urlString) {
+  parseDbUrl (urlString) {
     return api.urlStringToConfigHash(urlString);
-  },
+  }
 };
 
 module.exports = api;

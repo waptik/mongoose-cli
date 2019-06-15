@@ -8,14 +8,14 @@ exports.builder = yargs =>
   _baseOptions(yargs)
     .option('to', {
       describe: 'Migration name to run migrations until',
-      type: 'string',
+      type: 'string'
     })
     .option('from', {
       describe: 'Migration name to start migrations from (excluding)',
-      type: 'string',
+      type: 'string'
     }).argv;
 
-exports.handler = async function(args) {
+exports.handler = async function (args) {
   const command = args._[0];
 
   // legacy, gulp used to do this
@@ -33,7 +33,7 @@ exports.handler = async function(args) {
   process.exit(0);
 };
 
-function migrate(args) {
+function migrate (args) {
   return getMigrator('migration', args)
     .then(migrator => {
       return ensureCurrentMetaSchema(migrator)
@@ -65,7 +65,7 @@ function migrate(args) {
     .catch(e => helpers.view.error(e));
 }
 
-function migrationStatus(args) {
+function migrationStatus (args) {
   return getMigrator('migration', args)
     .then(migrator => {
       return ensureCurrentMetaSchema(migrator)

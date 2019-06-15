@@ -3,12 +3,12 @@ import beautify from 'js-beautify';
 import helpers from './index';
 
 module.exports = {
-  render(path, locals, options) {
+  render (path, locals, options) {
     options = _.assign(
       {
         beautify: true,
         indent_size: 2,
-        preserve_newlines: false,
+        preserve_newlines: false
       },
       options || {},
     );
@@ -21,5 +21,5 @@ module.exports = {
     }
 
     return content;
-  },
+  }
 };

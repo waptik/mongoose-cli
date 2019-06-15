@@ -2,30 +2,30 @@ import _ from 'lodash';
 import helpers from './index';
 
 const storage = {
-  migration: 'mongoose',
+  migration: 'mongoose'
 };
 const storageCollectionName = {
-  migration: 'mongoose_migrations_meta',
+  migration: 'mongoose_migrations_meta'
 };
 
 module.exports = {
-  getStorageOption(property, fallback) {
+  getStorageOption (property, fallback) {
     return helpers.config.readConfig()[property] || fallback;
   },
 
-  getStorage(type) {
+  getStorage (type) {
     return this.getStorageOption(type + 'Storage', storage[type]);
   },
 
-  getCollectionName(type) {
+  getCollectionName (type) {
     return this.getStorageOption(type + 'StorageCollectionName', storageCollectionName[type]);
   },
 
-  getSchema(type) {
+  getSchema (type) {
     return this.getStorageOption(type + 'StorageCollectionSchema', undefined);
   },
 
-  getStorageOptions(type, extraOptions) {
+  getStorageOptions (type, extraOptions) {
     const options = {};
 
     if (this.getStorage(type) === 'mongoose') {
@@ -35,5 +35,5 @@ module.exports = {
     _.assign(options, extraOptions);
 
     return options;
-  },
+  }
 };

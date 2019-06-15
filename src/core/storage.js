@@ -11,7 +11,7 @@ export default class MongooseStorage {
    * @param {String} [options.collectionName] - name of migration collection in MongoDB
    * @param {String} [options.collection] - reference to a MongoDB Driver collection
    */
-  constructor({ connection, collectionName, collection }) {
+  constructor ({ connection, collectionName, collection }) {
     this.connection = connection;
     this.collection = collection;
     this.collectionName = collectionName || 'migrations';
@@ -31,7 +31,7 @@ export default class MongooseStorage {
    * @param {String} migrationName - Name of the migration to be logged.
    * @returns {Promise}
    */
-  logMigration(migrationName) {
+  logMigration (migrationName) {
     return this.collection.insertOne({ name: migrationName, created_at: Date.now() });
   }
 
@@ -41,7 +41,7 @@ export default class MongooseStorage {
    * @param {String} migrationName - Name of the migration to be unlogged.
    * @returns {Promise}
    */
-  unlogMigration(migrationName) {
+  unlogMigration (migrationName) {
     return this.collection.removeOne({ name: migrationName });
   }
 
@@ -50,7 +50,7 @@ export default class MongooseStorage {
    *
    * @returns {Promise.<String[]>}
    */
-  executed() {
+  executed () {
     return this.collection
       .find({})
       .sort({ name: 1 })

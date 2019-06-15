@@ -4,15 +4,15 @@ import helpers from './index';
 const packageJson = require(path.resolve(__dirname, '..', '..', 'package.json'));
 
 module.exports = {
-  getCliVersion() {
+  getCliVersion () {
     return packageJson.version;
   },
 
-  getOdmVersion() {
+  getOdmVersion () {
     return helpers.generic.getMongoose('package.json').version;
   },
 
-  getNodeVersion() {
+  getNodeVersion () {
     return process.version.replace('v', '');
-  },
+  }
 };

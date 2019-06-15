@@ -1,28 +1,30 @@
 {
 	"presets": [
 		[
-			"@babel/preset-env",
+			"env",
 			{
 				"targets": {
-					"node": true
+					"node": "6.0"
 				},
 				"exclude": [
-					"@babel/plugin-transform-async-to-generator"
-					//"@babel/plugin-transform-regenerator"
+					"transform-async-to-generator",
+					"transform-regenerator"
 				],
-				"useBuiltIns": "entry"
+				"useBuiltIns": true
 			}
 		]
 	],
 	"plugins": [
-		"@babel/plugin-proposal-object-rest-spread",
+		"transform-object-rest-spread",
 		[
-			"@babel/plugin-transform-async-to-generator",
+			"transform-async-to-module-method",
 			{
 				"module": "bluebird",
 				"method": "coroutine"
 			}
 		]
 	],
-	"ignore": ["./src/assets"]
+	"ignore": [
+		"src/assets"
+	]
 }
