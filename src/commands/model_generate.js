@@ -32,7 +32,7 @@ exports.handler = function (args) {
     helpers.view.error(err.message);
   }
 
-  helpers.migration.generateTableCreationFile(args);
+  helpers.migration.generateCollectionCreationFileContent(args);
   helpers.view.log('New model was created at', clc.blueBright(helpers.path.getModelPath(args.name)), '.');
   helpers.view.log('New migration was created at', clc.blueBright(helpers.path.getMigrationPath(args.name)), '.');
 
@@ -45,7 +45,7 @@ function ensureModelsFolder () {
       'Unable to find models path (' +
         helpers.path.getModelsPath() +
         '). Did you run ' +
-        clc.blueBright('sequelize init') +
+        clc.blueBright('mongoose init') +
         '?',
     );
   }
@@ -57,7 +57,7 @@ function ensureMigrationsFolder () {
       'Unable to find migrations path (' +
         helpers.path.getPath('migration') +
         '). Did you run ' +
-        clc.blueBright('sequelize init') +
+        clc.blueBright('mongoose init') +
         '?',
     );
   }

@@ -6,11 +6,11 @@ import getYArgs from '../core/yargs';
 const args = getYArgs().argv;
 
 module.exports = {
-  teaser() {
+  teaser () {
     const versions = [
       'Node: ' + helpers.version.getNodeVersion(),
       'CLI: ' + helpers.version.getCliVersion(),
-      'ODM: ' + helpers.version.getOdmVersion(),
+      'ODM: ' + helpers.version.getOdmVersion()
     ];
 
     this.log();
@@ -18,11 +18,11 @@ module.exports = {
     this.log();
   },
 
-  log() {
+  log () {
     console.log.apply(this, arguments);
   },
 
-  error(error) {
+  error (error) {
     let message = error;
 
     if (error instanceof Error) {
@@ -36,23 +36,23 @@ module.exports = {
     process.exit(1);
   },
 
-  info(message) {
+  info (message) {
     this.log(`${clc.underline('INFO:')} ${message}`);
   },
 
-  ok(message) {
+  ok (message) {
     this.log(`${clc.green('SUCCESS:')} ${message}`);
   },
 
-  warn(message) {
+  warn (message) {
     this.log(`${clc.yellow('WARNING:')} ${message}`);
   },
 
-  notifyAboutExistingFile(file) {
+  notifyAboutExistingFile (file) {
     this.error('The file ' + clc.blueBright(file) + ' already exists. ' + 'Run command with --force to overwrite it.');
   },
 
-  pad(s, smth) {
+  pad (s, smth) {
     let margin = smth;
 
     if (_.isObject(margin)) {
@@ -69,5 +69,5 @@ module.exports = {
     }
 
     return s + new Array(margin - s.length + 1).join(' ');
-  },
+  }
 };

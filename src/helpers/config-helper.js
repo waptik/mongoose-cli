@@ -121,6 +121,7 @@ const api = {
 
       if (api.rawConfig === undefined) {
         throw new Error('Error reading "' + api.relativeConfigFile() + '". Error: ' + api.error);
+        helpers.view.error(api);
       }
 
       if (typeof api.rawConfig !== 'object') {
@@ -139,7 +140,7 @@ const api = {
         api.rawConfig = api.rawConfig[env];
       }
 
-      // The Sequelize library needs a function passed in to its logging option
+      // The Mongoose library needs a function passed in to its logging option
       if (api.rawConfig.logging && !_.isFunction(api.rawConfig.logging)) {
         api.rawConfig.logging = console.log;
       }

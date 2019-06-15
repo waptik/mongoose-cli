@@ -26,7 +26,7 @@ function createFolder (folderName, folder, force) {
   try {
     if (fs.existsSync(folder) === false) {
       helpers.asset.mkdirp(folder);
-      helpers.view.ok('Successfully created ' + clc.blueBright(folderName) + ' folder at "' + folder + '".');
+      helpers.view.ok('Successfully created ' + clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '".');
     } else {
       helpers.view.error(clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '" already exists.');
     }
@@ -64,7 +64,7 @@ const init = {
         {
           beautify: false
         },
-      )
+      );
 
       helpers.view.info('model Index path: ' + indexPath + '\n\n' + 'Relative config path: ' + relativeConfigPath + '\n\n');
 

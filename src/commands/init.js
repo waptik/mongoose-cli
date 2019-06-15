@@ -6,7 +6,7 @@ exports.builder = yargs =>
   _baseOptions(yargs).option('force', {
     describe: 'Will drop the existing config folder and re-create it',
     type: 'boolean',
-    default: false,
+    default: false
   }).argv;
 
 exports.handler = async function (argv) {

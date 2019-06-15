@@ -10,6 +10,7 @@ function loadRCFile (optionsPath) {
 
 const args = yargs
   .help(false)
+  //.debug(true)
   .version(false)
   .config(loadRCFile(yargs.argv.optionsPath));
 
@@ -30,6 +31,7 @@ export function _baseOptions (yargs) {
     })
     .option('options-path', {
       describe: 'The path to a JSON file with additional options',
+      default: './',
       type: 'string'
     })
     .option('migrations-path', {
@@ -44,7 +46,7 @@ export function _baseOptions (yargs) {
     })
     .option('debug', {
       describe: 'When available show various debug information',
-      default: false,
+      default: true,
       type: 'boolean'
     });
 }

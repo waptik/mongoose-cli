@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// eslint-disable-next-line no-unused-vars
 import clc from 'cli-color';
 import getYArgs from './core/yargs';
 import Promise from 'bluebird';
@@ -20,11 +21,11 @@ Promise.coroutine.addYieldHandler(yieldedValue => {
 });
 
 import init from './commands/init';
-// import migrate from './commands/migrate';
+//import migrate from './commands/migrate';
 // import migrateUndo from './commands/migrate_undo';
 // import migrateUndoAll from './commands/migrate_undo_all';
 // import migrationGenerate from './commands/migration_generate';
-// import modelGenerate from './commands/model_generate';
+import modelGenerate from './commands/model_generate';
 
 import helpers from './helpers/index';
 
@@ -42,13 +43,15 @@ const cli = yargs
   .command('init:migrations', 'Initializes migrations', init)
   .command('init:models', 'Initializes models', init)
   // .command(['migration:generate', 'migration:create'], 'Generates a new migration file', migrationGenerate)
-  // .command(['model:generate', 'model:create'], 'Generates a model and its migration', modelGenerate)
+  .command(['model:generate', 'model:create'], 'Generates a model and its migration', modelGenerate)
   .wrap(yargs.terminalWidth())
   .strict();
 
 const args = cli.argv;
 
+helpers.view.log(args);
+
 // if no command then show help
 if (!args._[0]) {
-  clc.whiteBright(cli.showHelp());
+  helpers.view.log(cli.showHelp());
 }

@@ -4,12 +4,16 @@ const Mongoose = helpers.generic.getMongoose();
 
 const validAttributeFunctionType = ['array', 'enum'];
 
+console.log('Mongoose instance: ', Mongoose.SchemaType);
+
 /**
  * Check the given dataType actual exists.
  * @param {string} dataType
  */
 function validateDataType (dataType) {
-  if (!Mongoose.Schema.Types.dataType) {
+  console.log('\n\nSchema name: ', Mongoose.Schema.Types[dataType].schemaName);
+
+  if (Mongoose.Schema.Types[dataType].schemaName !== dataType) {
     throw new Error(`Unknown type '${dataType}'`);
   }
 

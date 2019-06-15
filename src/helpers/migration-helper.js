@@ -1,10 +1,16 @@
 import _ from 'lodash';
 import helpers from './index';
 
+const Mongoose = helpers.generic.getMongoose();
+
 module.exports = {
-  generateTableCreationFileContent (args) {
+  getCollectionName(modelName) {
+    return Mongoose.pluralize(modelName);
+  },
+
+  generateCreationFileContent (args) {
     return helpers.template.render('migrations/create-table.js', {
-      tableName: this.getTableName(args.name),
+      tableName: this.getCollectionName(args.name),
       attributes: helpers.model.transformAttributes(args.attributes),
       createdAt: 'created_at',
       updatedAt: 'updated_at'
@@ -15,10 +21,10 @@ module.exports = {
     return _.trimStart(_.kebabCase('create-' + args.name), '-');
   },
 
-  generateTableCreationFile (args) {
+  generateCollectionCreationFile (args) {
     const migrationName = this.generateMigrationName(args);
     const migrationPath = helpers.path.getMigrationPath(migrationName);
 
-    helpers.asset.write(migrationPath, this.generateTableCreationFileContent(args));
+    helpers.asset.write(migrationPath, this.generateCollectionCreationFileContent(args));
   }
 };
