@@ -10,6 +10,9 @@ node_modules
 libs
 tests
 lib
+config
+models
+migrations
 #src/assets
 
 # Extra files
