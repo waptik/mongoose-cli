@@ -1,23 +1,22 @@
 'use strict';
 
-module.exports = (mongoose) => {
+module.exports = mongoose => {
   const newSchema = new mongoose.Schema({
     <% attributes.forEach(function(attribute, index) { %>
-      <%= attribute.fieldName %>: DataTypes.<%= attribute.dataFunction ? `${attribute.dataFunction.toUpperCase()}(DataTypes.${attribute.dataType.toUpperCase()})` : attribute.dataValues ? `${attribute.dataType.toUpperCase()}(${attribute.dataValues})` : attribute.dataType.toUpperCase() %>
+      <%= attribute.fieldName %>: { 
+        type: <%= attribute.dataFunction ? `${attribute.dataFunction}(${attribute.dataType})` : attribute.dataValues ? `${attribute.dataType}(${attribute.dataValues})` : attribute.dataType %>
+      }
       <%= (Object.keys(attributes).length - 1) > index ? ',' : '' %>
     <% }) %>
   }, {
     timestamps: {
       createdAt: 'created_at', 
-      updatedAt: 'update_at'
+      updatedAt: 'updated_at'
      }
   });
 
 
   const <%= name %> = mongoose.model('<%= name %>', newSchema);
-
-  //underscored
-//timestamps: { createdAt: 'created_at', updatedAt: 'update_at' }
 
   return <%= name %>;
 };

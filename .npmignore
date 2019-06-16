@@ -14,8 +14,9 @@ lib-cov
 coverage
 
 node_modules
-libs
+config
+models
+migrations
 
 package-lock.json
-.vscode
-npm-debug.log
+.vscode 

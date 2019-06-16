@@ -120,8 +120,8 @@ const api = {
       const env = helpers.generic.getEnvironment();
 
       if (api.rawConfig === undefined) {
-        throw new Error('Error reading "' + api.relativeConfigFile() + '". Error: ' + api.error);
         helpers.view.error(api);
+        throw new Error('\nError reading "' + api.relativeConfigFile() + '". Error: ' + api.error);
       }
 
       if (typeof api.rawConfig !== 'object') {

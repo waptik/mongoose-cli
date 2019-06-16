@@ -3,14 +3,13 @@ import yargs from 'yargs';
 import path from 'path';
 
 function loadRCFile (optionsPath) {
-  const rcFile = optionsPath || path.resolve(process.cwd(), '.mongooserc');
+  const rcFile = optionsPath || path.resolve(process.cwd(), '.mongooserc') || path.resolve(process.cwd(), 'mongoose.json');
   const rcFileResolved = path.resolve(rcFile);
   return fs.existsSync(rcFileResolved) ? JSON.parse(JSON.stringify(require(rcFileResolved))) : {};
 }
 
 const args = yargs
   .help(false)
-  //.debug(true)
   .version(false)
   .config(loadRCFile(yargs.argv.optionsPath));
 
@@ -46,7 +45,7 @@ export function _baseOptions (yargs) {
     })
     .option('debug', {
       describe: 'When available show various debug information',
-      default: true,
+      default: false,
       type: 'boolean'
     });
 }

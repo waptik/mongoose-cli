@@ -24,62 +24,10 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = importModels(path.join(__dirname, file));
+    const model = require(path.resolve(__dirname, file));
     db[model.name] = model;
   });
-
 
 db.mongoose = mongoose;
 
 module.exports = db;
-
-
-/**
- * Everything here is not to be touched
- */
-
-// save imported models
-importCache = {};
-
-function stack() {
-  const orig = Error.prepareStackTrace;
-  Error.prepareStackTrace = (_, stack) => stack;
-  const err = new Error();
-  Error.captureStackTrace(err, stack);
-  const errStack = err.stack;
-  Error.prepareStackTrace = orig;
-  return errStack;
-}
-
-  /**
-   * Imports a model defined in another file. Imported models are cached, so multiple
-   * calls to import with the same path will not load the file multiple times.
-   *
-   * @credit https://github.com/sequelize/sequelize/blob/master/lib/sequelize.js#L466
-   *
-   * @param {string} importPath The path to the file that holds the model you want to import. If the part is relative, it will be resolved relatively to the calling file
-   *
-   * @returns {Model} Imported model, returned from cache if was already imported
-   */
-  importModels(importPath) {
-    // is it a relative path?
-    if (path.normalize(importPath) !== path.resolve(importPath)) {
-      // make path relative to the caller
-      const callerFilename = stack()[1].getFileName();
-      const callerPath = path.dirname(callerFilename);
-
-      importPath = path.resolve(callerPath, importPath);
-    }
-
-    if (!importCache[importPath]) {
-      let defineCall = arguments.length > 1 ? arguments[1] : require(importPath);
-      if (typeof defineCall === 'object') {
-        // ES6 module compatibility
-        defineCall = defineCall.default;
-      }
-      importCache[importPath] = defineCall(this, DataTypes);
-    }
-
-    return importCache[importPath];
-  }
-

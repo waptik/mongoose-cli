@@ -30,7 +30,7 @@
     "build-bin": "mv ./lib/mongoose.js ./lib/mongoose && chmod +x ./lib/mongoose",
     "build-assets": "cp -R ./src/assets ./lib/",
     "build-clean": "rm -rf ./lib/",
-    "lint": "eslint src --fix",
+    "lint": "eslint src --quiet --fix",
     "test:report": "jest",
     "test": "yarn lint && yarn build && yarn test:report"
   },

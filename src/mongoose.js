@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// eslint-disable-next-line no-unused-vars
 import clc from 'cli-color';
 import getYArgs from './core/yargs';
 import Promise from 'bluebird';
@@ -49,9 +48,9 @@ const cli = yargs
 
 const args = cli.argv;
 
-helpers.view.log(args);
+clc.white(args);
 
 // if no command then show help
 if (!args._[0]) {
-  helpers.view.log(cli.showHelp());
+  clc.white(cli.showHelp());
 }

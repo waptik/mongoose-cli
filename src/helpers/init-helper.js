@@ -26,7 +26,9 @@ function createFolder (folderName, folder, force) {
   try {
     if (fs.existsSync(folder) === false) {
       helpers.asset.mkdirp(folder);
-      helpers.view.ok('Successfully created ' + clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '".');
+      helpers.view.ok(
+        'Successfully created ' + clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '".',
+      );
     } else {
       helpers.view.error(clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '" already exists.');
     }
@@ -53,7 +55,7 @@ const init = {
     } else if (helpers.path.existsSync(indexPath) && !force) {
       helpers.view.notifyAboutExistingFile(indexPath);
     } else {
-
+      
       const relativeConfigPath = path.relative(helpers.path.getModelsPath(), helpers.config.getConfigFile());
 
       const renderModelIndex = helpers.template.render(
@@ -66,14 +68,7 @@ const init = {
         },
       );
 
-      helpers.view.info('model Index path: ' + indexPath + '\n\n' + 'Relative config path: ' + relativeConfigPath + '\n\n');
-
-      const writeModelIndexFile = helpers.asset.write(
-        indexPath,
-        renderModelIndex,
-      );
-
-      helpers.view.info('Render model index file: ' + renderModelIndex + '\n\n' + 'Write to model index file: ' + writeModelIndexFile + '\n\n');
+      const writeModelIndexFile = helpers.asset.write(indexPath, renderModelIndex);
 
       writeModelIndexFile;
     }

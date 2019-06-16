@@ -7,8 +7,6 @@ logs
 
 # Extra folders
 node_modules
-libs
-tests
 lib
 config
 models
@@ -17,5 +15,3 @@ migrations
 
 # Extra files
 package-lock.json
-npm-debug.log
-yarn-error.log

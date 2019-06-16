@@ -4,11 +4,11 @@ import helpers from './index';
 const Mongoose = helpers.generic.getMongoose();
 
 module.exports = {
-  getCollectionName(modelName) {
+  getCollectionName (modelName) {
     return Mongoose.pluralize(modelName);
   },
 
-  generateCreationFileContent (args) {
+  generateCollectionCreationFileContent (args) {
     return helpers.template.render('migrations/create-table.js', {
       tableName: this.getCollectionName(args.name),
       attributes: helpers.model.transformAttributes(args.attributes),
