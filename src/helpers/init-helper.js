@@ -61,7 +61,14 @@ const init = {
       const renderModelIndex = helpers.template.render(
         'models/index.js',
         {
-          configFile: "__dirname + '/" + relativeConfigPath.replace(/\\/g, '/') + "'"
+          configFile: "__dirname + '/" + relativeConfigPath.replace(/\\/g, '/') + "'",
+          // the following are used to bypass `config` not found property issue
+          database: '${config.database.name}',
+          host: '${config.database.host}',
+          username: '${config.database.username}',
+          password: '${config.database.password}',
+          port: '${config.database.port}',
+          protocol: '${config.database.protocol}'
         },
         {
           beautify: false

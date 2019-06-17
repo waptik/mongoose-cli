@@ -1,5 +1,6 @@
 import Umzug from 'umzug';
 import Bluebird from 'bluebird';
+// eslint-disable-next-line no-unused-vars
 import _ from 'lodash';
 import { resolve } from 'path';
 import helpers from '../helpers/index';
@@ -18,22 +19,32 @@ function getMongooseInstance () {
 
   try {
     config = helpers.config.readConfig();
+    console.trace(config);
+
+    console.log('Config\n: ', config);
+
   } catch (e) {
     helpers.view.error(e);
+    console.trace(e);
   }
 
-  config = _.defaults(config, { logging: logMigrator });
+  //config = _.defaults(config, { logging: logMigrator });
 
   try {
     Mongoose.connect(config.database.url, config.database.options);
+
+    console.log('\n\nMongoose: \n\n', Mongoose);
+
     return Mongoose;
   } catch (e) {
-    helpers.view.error(e);
+    helpers.view.error(Object.keys(e));
+    console.trace(e);
   }
 }
 
 // mongoose instance things related
 const mongoose = getMongooseInstance();
+console.log('\n\nmongoose: ', mongoose);
 
 export function getMigrator (type, args) {
   return Bluebird.try(() => {
@@ -41,7 +52,7 @@ export function getMigrator (type, args) {
       helpers.view.error(
         'Cannot find "' +
           helpers.config.getConfigFile() +
-          '". Have you initialized mongoose-cmd in your project by running "mongoose init"?',
+          '". Have you initialized mongoosejs-cli in your project by running "mongoose init"?',
       );
       process.exit(1);
     }
@@ -68,7 +79,11 @@ export function getMigrator (type, args) {
       });
     };
 
-    return mongoose.connection.then(res => migrator(res)).catch(e => helpers.view.error(e));
+    return mongoose.connection(res => migrator(res))
+      .catch(e => {
+        helpers.view.error(e);
+        console.trace(e);
+      });
   });
 }
 

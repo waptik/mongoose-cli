@@ -9,9 +9,11 @@ import getYArgs from '../core/yargs';
 const args = getYArgs().argv;
 
 const api = {
+
   config: undefined,
   rawConfig: undefined,
   error: undefined,
+
   init () {
     return Bluebird.resolve()
       .then(() => {
@@ -22,29 +24,57 @@ const api = {
         } else {
           try {
             config = require(api.getConfigFile());
+
+            console.log('\n\ninit() 1st then: ', config);
+
           } catch (e) {
             api.error = e;
+
+            console.log('\n\ninit() 1st then: ', api.error);
+
           }
         }
+
+        console.log('\n\ninit() 1st then, return config: ', config);
+
         return config;
       })
       .then(config => {
         if (typeof config === 'object' || config === undefined) {
+
+          console.log('\n\ninit() 2nd then: ', config);
+
           return config;
         } else if (config.length === 1) {
+
+          console.log('\n\ninit() 2nd then, return promisify: \n', Bluebird.promisify(config)());
+
           return Bluebird.promisify(config)();
         } else {
+
+          console.log('\n\ninit() 2nd then, return config(): ', config());
+
           return config();
         }
       })
       .then(config => {
         api.rawConfig = config;
+
+        console.log('\n\ninit() 3rd then, rawConfig: ', api.rawConfig);
+
       })
       .then(() => {
         // Always return the full config api
+
+        console.log('\n\ninit() 3rd then, return api: ', api);
+
         return api;
+      })
+      .catch(e => {
+        console.log('init error: ', e);
       });
   },
+
   getConfigFile () {
     if (args.config) {
       return path.resolve(process.cwd(), args.config);
@@ -120,8 +150,9 @@ const api = {
       const env = helpers.generic.getEnvironment();
 
       if (api.rawConfig === undefined) {
-        helpers.view.error(api);
-        throw new Error('\nError reading "' + api.relativeConfigFile() + '". Error: ' + api.error);
+        console.log('Api: ', api.init());
+
+        throw new Error('\nApi: ' + api.config + '\nBluebird: ' + Bluebird.resolve() + '\nError reading "' + api.relativeConfigFile() + '". Error: ' + api.error + '\nConfig relative path: ' + api.relativeConfigFile() + '\nConfig file: ' + api.getConfigFile() + '\n');
       }
 
       if (typeof api.rawConfig !== 'object') {

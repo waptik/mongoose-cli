@@ -8,14 +8,12 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(<%= configFile %>)[env];
 const db = {};
 
-if (config.database.use_env_variable) {
-  mongoose.connect(process.env[config.use_env_variable], config);
-} else if (config.database.url) {
+if (config.database.url) {
   mongoose.connect(config.database.url, config.database.config);
 } else if (config.database.config.dbName) {
-  mongoose.connect(`${config.database.protocol}://${config.database.username}:${config.database.password}@${config.database.host}:${config.database.port}`, config.database.config);
+  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}`, config.database.config);
 } else {
- mongoose.connect(`${config.database.protocol}://${config.database.username}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}`, config.database.config);
+  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}/${database}`, config.database.config);
 }
 
 fs
