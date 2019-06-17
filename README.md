@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to mongoosejs-cli 👋</h1>
+# Welcome to mongoosejs-cli 👋
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-%3E%3D11.0.0-blue.svg" />
@@ -15,6 +15,8 @@
     <img alt="Twitter: _waptik" src="https://img.shields.io/twitter/follow/_waptik.svg?style=social" target="_blank" />
   </a>
 </p>
+[![Build Status](https://travis-ci.org/waptik/mongoose-cli.svg?branch=master)](https://travis-ci.org/waptik/mongoose-cli) [![Greenkeeper badge](https://badges.greenkeeper.io/waptik/mongoose-cli.svg)](https://greenkeeper.io/)
+
 
 > A command line interface (CLI) for Mongoose to generate models and migrations ith ease.
 
@@ -28,47 +30,56 @@
 
 ## Install
 
-- You can install it globally
+### Globally
 
 ```sh
 yarn global add mongoosejs-cli
 ```
 
-- or locally
+### Locally
 
 ```sh
 yarn add mongoosejs-cli
 ```
 ## Note
-We'll be using the following shorthand for the package name depending on your scope of installation:
-- [mongoose]
-  - globally:  `mongoose`
-  - locally: `node .\node_modules\.bin\mongoose`
+We'll be using the following shorthand for the package name's command depending on your scope of installation:
+> - [mongoose_pkg_name]
+>   - globally:  `mongoose`
+>   - locally: `node .\node_modules\.bin\mongoose`
 
 
 ## Usage
 
-To display list of commands, do the following
+### To display list of commands, do the following
 
 ```sh
-[mongoose]
+[mongoose_pkg_name]
 ```
+
+### To initialize the project
 
 We recommend that after viewing the lis of commands, first thing to do, is to generate the required files and directories needed to get started. It can achieved by entering the following command.
 
 ```sh
-[mongoose] init
+[mongoose_pkg_name] init
 ```
 
 This will generate the following:
 
 ```sh
-- config/ => the directory containing all your configuration files
-  config.json => the default configuration files that contains the database connection strings based on the environment(NODE_ENV). You can add extra environments as well.
-- models/ => the directory that contains all your mongoose models you generated through the package
-  index.js => this file does the database connection and imports all your models
-- migrations/ => directory containing all your migration files
+ config/
+  config.json
+ models/
+  index.js
+ migrations/
 ```
+
+
+- config/ => the directory containing all your configuration files
+-  config.json => the default configuration files that contains the database connection strings based on the environment(NODE_ENV). You can add extra environments as well.
+- models/ => the directory that contains all your mongoose models you generated through the package
+-  index.js => this file does the database connection and imports all your models
+- migrations/ => directory containing all your migration files
 
 ## Run tests
 
