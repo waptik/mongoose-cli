@@ -2,7 +2,7 @@ import _ from 'lodash';
 import helpers from './index';
 
 const storage = {
-  migration: 'mongoose'
+  migration: 'mongodb'
 };
 const storageCollectionName = {
   migration: 'mongoose_migrations_meta'

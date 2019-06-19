@@ -15,44 +15,39 @@ export function logMigrator (s) {
 }
 
 function getMongooseInstance () {
-  let config = null;
+  async () => {
 
-  try {
-    config = helpers.config.readConfig();
-    console.trace(config);
+    let config = null;
 
-    console.log('Config\n: ', config);
+    try {
+      await helpers.config.init();
+      config = helpers.config.readConf();
+    } catch (e) {
+      helpers.view.error(e);
+    }
 
-  } catch (e) {
-    helpers.view.error(e);
-    console.trace(e);
-  }
+    //config = _.defaults(config, { logging: logMigrator });
 
-  //config = _.defaults(config, { logging: logMigrator });
+    try {
+      Mongoose.connect(config.database.url, config.database.options);
 
-  try {
-    Mongoose.connect(config.database.url, config.database.options);
-
-    console.log('\n\nMongoose: \n\n', Mongoose);
-
-    return Mongoose;
-  } catch (e) {
-    helpers.view.error(Object.keys(e));
-    console.trace(e);
-  }
+      return Mongoose;
+    } catch (e) {
+      helpers.view.error(Object.keys(e));
+    }
+  };
 }
 
 // mongoose instance things related
 const mongoose = getMongooseInstance();
-console.log('\n\nmongoose: ', mongoose);
 
 export function getMigrator (type, args) {
   return Bluebird.try(() => {
     if (!(helpers.config.configFileExists() || args.url)) {
       helpers.view.error(
         'Cannot find "' +
-          helpers.config.getConfigFile() +
-          '". Have you initialized mongoosejs-cli in your project by running "mongoose init"?',
+        helpers.config.getConfigFile() +
+        '". Have you initialized mongoosejs-cli in your project by running "mongoose init"?',
       );
       process.exit(1);
     }
@@ -79,7 +74,10 @@ export function getMigrator (type, args) {
       });
     };
 
-    return mongoose.connection(res => migrator(res))
+    return mongoose
+      .connection(res => {
+        migrator(res);
+      })
       .catch(e => {
         helpers.view.error(e);
         console.trace(e);
@@ -99,7 +97,7 @@ export function ensureCurrentMetaSchema (migrator) {
         return;
       }
     })
-    .catch(() => {});
+    .catch(() => { });
 }
 
 function ensureMetaTable (connection, collectionName) {
@@ -115,6 +113,8 @@ function ensureMetaTable (connection, collectionName) {
         names.map(c => {
           array.push(c.name);
         });
+
+        console.log('collection names: ', array);
 
         if (array.indexOf(collectionName) === -1) {
           throw new Error('No Collection for migraions found.');

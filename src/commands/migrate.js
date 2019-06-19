@@ -18,7 +18,6 @@ exports.builder = yargs =>
 exports.handler = async function (args) {
   const command = args._[0];
 
-  // legacy, gulp used to do this
   await helpers.config.init();
 
   switch (command) {

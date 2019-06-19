@@ -26,6 +26,7 @@
     "src/assets"
   ],
   "scripts": {
+    "try": "babel-node try.js",
     "build": "yarn build-clean && babel src -d lib && yarn build-bin && yarn build-assets",
     "build-bin": "mv ./lib/mongoose.js ./lib/mongoose && chmod +x ./lib/mongoose",
     "build-assets": "cp -R ./src/assets ./lib/",

@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-
-import chalk from 'chalk';
 import getYArgs from './core/yargs';
 import Promise from 'bluebird';
 import { isEmpty } from 'lodash';
@@ -20,9 +18,9 @@ Promise.coroutine.addYieldHandler(yieldedValue => {
 });
 
 import init from './commands/init';
-// import migrate from './commands/migrate';
-// import migrateUndo from './commands/migrate_undo';
-// import migrateUndoAll from './commands/migrate_undo_all';
+import migrate from './commands/migrate';
+import migrateUndo from './commands/migrate_undo';
+import migrateUndoAll from './commands/migrate_undo_all';
 import migrationGenerate from './commands/migration_generate';
 import modelGenerate from './commands/model_generate';
 
@@ -33,10 +31,10 @@ helpers.view.teaser();
 const cli = yargs
   .help()
   .version()
-  // .command('db:migrate', 'Run pending migrations', migrate)
-  // .command('db:migrate:status', 'List the status of all migrations', migrate)
-  // .command('db:migrate:undo', 'Reverts a migration', migrateUndo)
-  // .command('db:migrate:undo:all', 'Revert all migrations ran', migrateUndoAll)
+  .command('db:migrate', 'Run pending migrations', migrate)
+  .command('db:migrate:status', 'List the status of all migrations', migrate)
+  .command('db:migrate:undo', 'Reverts a migration', migrateUndo)
+  .command('db:migrate:undo:all', 'Revert all migrations ran', migrateUndoAll)
   .command('init', 'Initializes project', init)
   .command('init:config', 'Initializes configuration', init)
   .command('init:migrations', 'Initializes migrations', init)
@@ -48,9 +46,7 @@ const cli = yargs
 
 const args = cli.argv;
 
-chalk.bgBlue(yargs);
-
 // if no command then show help
 if (!args._[0]) {
-  chalk.bgBlue(cli.showHelp());
+  cli.showHelp();
 }

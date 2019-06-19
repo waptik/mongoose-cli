@@ -10,8 +10,6 @@ exports.builder = yargs =>
   }).argv;
 
 exports.handler = async function (args) {
-  // legacy, gulp used to do this
-  await helpers.config.init();
 
   await migrateUndo(args);
 

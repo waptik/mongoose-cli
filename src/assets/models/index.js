@@ -9,11 +9,11 @@ const config = require(<%= configFile %>)[env];
 const db = {};
 
 if (config.database.url) {
-  mongoose.connect(config.database.url, config.database.config);
+  mongoose.connect(config.database.url, config.database.options);
 } else if (config.database.config.dbName) {
-  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}`, config.database.config);
+  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}`, config.database.options);
 } else {
-  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}/${database}`, config.database.config);
+  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}/${database}`, config.database.options);
 }
 
 fs
