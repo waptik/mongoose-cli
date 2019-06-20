@@ -1,4 +1,4 @@
-# Welcome to mongoosejs-cli 👋
+<h1 align="center">Welcome to mongoosejs-cli 👋</h1>
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-%3E%3D11.0.0-blue.svg" />
@@ -14,8 +14,13 @@
   <a href="https://twitter.com/_waptik">
     <img alt="Twitter: _waptik" src="https://img.shields.io/twitter/follow/_waptik.svg?style=social" target="_blank" />
   </a>
+  <a href="https://travis-ci.org/waptik/mongoose-cli">
+    <img alt="Build Status" src="https://travis-ci.org/waptik/mongoose-cli.svg?branch=master" target="_blank" />
+  </a>
+  <a href="https://greenkeeper.io/waptik/mongoose-cli">
+    <img alt="Greenkeeper badge" src="https://badges.greenkeeper.io/waptik/mongoose-cli.svg" target="_blank" />
+  </a>
 </p>
-[![Build Status](https://travis-ci.org/waptik/mongoose-cli.svg?branch=master)](https://travis-ci.org/waptik/mongoose-cli) [![Greenkeeper badge](https://badges.greenkeeper.io/waptik/mongoose-cli.svg)](https://greenkeeper.io/)
 
 
 > A command line interface (CLI) for Mongoose to generate models and migrations ith ease.

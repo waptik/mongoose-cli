@@ -5,7 +5,7 @@
   "bin": {
     "mongoose": "./lib/mongoose"
   },
-  "homepage": "https://github.com/waptik/mongoose-cli",
+  "homepage": "https://github.com/waptik/mongoose-cli#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/waptik/mongoose-cli.git"
@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "try": "babel-node try.js",
+    "babel": "babel-node",
     "build": "yarn build-clean && babel src -d lib && yarn build-bin && yarn build-assets",
     "build-bin": "mv ./lib/mongoose.js ./lib/mongoose && chmod +x ./lib/mongoose",
     "build-assets": "cp -R ./src/assets ./lib/",
