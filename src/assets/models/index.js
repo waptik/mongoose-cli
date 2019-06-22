@@ -1,31 +1,37 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(<%= configFile %>)[env];
-const db = {};
 
 if (config.database.url) {
-  mongoose.connect(config.database.url, config.database.options);
+  Mongoose.connect(config.database.url, config.database.options);
 } else if (config.database.config.dbName) {
-  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}`, config.database.options);
+  Mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}`, config.database.options);
 } else {
-  mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}/${database}`, config.database.options);
+  Mongoose.connect(`${protocol}://${username}:${password}@${host}:${port}/${database}`, config.database.options);
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = require(path.resolve(__dirname, file));
-    db[model.name] = model;
-  });
+const db = () => {
+  const m = {};
 
-db.mongoose = mongoose;
+  fs
+    .readdirSync(__dirname)
+    .filter(file => {
+      return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    })
+    .forEach(file => {
+      const model = require(path.resolve(__dirname, file))(Mongoose);
+      m[model.modelName] = model;
+    });
 
-module.exports = db;
+  return m;
+}
+
+
+const models = db();
+const mongoose = Mongoose;
+
+module.exports = mongoose;
+module.exports.default = models;

@@ -1,5 +1,5 @@
 import { _baseOptions } from '../core/yargs';
-import { getMigrator, ensureCurrentMetaSchema } from '../core/migrator';
+import { getMigrator, ensureCollectionSchema } from '../core/migrator';
 
 import helpers from '../helpers';
 import _ from 'lodash';
@@ -35,7 +35,7 @@ exports.handler = async function (args) {
 function migrate (args) {
   return getMigrator('migration', args)
     .then(migrator => {
-      return ensureCurrentMetaSchema(migrator)
+      return ensureCollectionSchema(migrator)
         .then(() => migrator.pending())
         .then(migrations => {
           const options = {};
@@ -67,7 +67,7 @@ function migrate (args) {
 function migrationStatus (args) {
   return getMigrator('migration', args)
     .then(migrator => {
-      return ensureCurrentMetaSchema(migrator)
+      return ensureCollectionSchema(migrator)
         .then(() => migrator.executed())
         .then(migrations => {
           _.forEach(migrations, migration => {

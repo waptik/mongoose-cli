@@ -17,6 +17,7 @@ node_modules
 config
 models
 migrations
+seeders
 
 
 package-lock.json

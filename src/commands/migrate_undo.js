@@ -1,5 +1,5 @@
 import { _baseOptions } from '../core/yargs';
-import { getMigrator, ensureCurrentMetaSchema } from '../core/migrator';
+import { getMigrator, ensureCollectionSchema } from '../core/migrator';
 
 import helpers from '../helpers';
 
@@ -10,6 +10,7 @@ exports.builder = yargs =>
   }).argv;
 
 exports.handler = async function (args) {
+  await helpers.config.init();
 
   await migrateUndo(args);
 
@@ -19,7 +20,7 @@ exports.handler = async function (args) {
 function migrateUndo (args) {
   return getMigrator('migration', args)
     .then(migrator => {
-      return ensureCurrentMetaSchema(migrator)
+      return ensureCollectionSchema(migrator)
         .then(() => migrator.executed())
         .then(migrations => {
           if (migrations.length === 0) {

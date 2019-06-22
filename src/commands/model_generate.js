@@ -23,7 +23,6 @@ exports.builder = yargs =>
 
 exports.handler = function (args) {
   ensureModelsFolder();
-  ensureMigrationsFolder();
   checkModelFileExistence(args);
 
   try {
@@ -32,9 +31,7 @@ exports.handler = function (args) {
     helpers.view.error(err.message);
   }
 
-  helpers.migration.generateCollectionCreationFileContent(args);
   helpers.view.log('New model was created at', clc.blueBright(helpers.path.getModelPath(args.name)), '.');
-  helpers.view.log('New migration was created at', clc.blueBright(helpers.path.getMigrationPath(args.name)), '.');
 
   process.exit(0);
 };
@@ -43,22 +40,10 @@ function ensureModelsFolder () {
   if (!helpers.path.existsSync(helpers.path.getModelsPath())) {
     helpers.view.error(
       'Unable to find models path (' +
-        helpers.path.getModelsPath() +
-        '). Did you run ' +
-        clc.blueBright('mongoose init') +
-        '?',
-    );
-  }
-}
-
-function ensureMigrationsFolder () {
-  if (!helpers.path.existsSync(helpers.path.getPath('migration'))) {
-    helpers.view.error(
-      'Unable to find migrations path (' +
-        helpers.path.getPath('migration') +
-        '). Did you run ' +
-        clc.blueBright('mongoose init') +
-        '?',
+      helpers.path.getModelsPath() +
+      '). Did you run ' +
+      clc.blueBright('mongoose init') +
+      '?',
     );
   }
 }

@@ -52,6 +52,10 @@ module.exports = {
     return path.resolve(this.getPath('migration'), this.getFileName('migration', migrationName));
   },
 
+  getSeederPath (seederName) {
+    return path.resolve(this.getPath('seeder'), this.getFileName('seeder', seederName));
+  },
+
   getModelsPath () {
     return args.modelsPath || path.resolve(process.cwd(), 'models');
   },

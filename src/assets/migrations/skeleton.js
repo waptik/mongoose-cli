@@ -1,23 +1,15 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface) => {
+  up: (models, mongoose) => {
     /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.createTable('users', { id: Sequelize.INTEGER });
+      refer to mongoose docs on how to alter a model's schema
     */
   },
 
-  down: (queryInterface) => {
+  down: (models, mongoose) => {
     /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
+      undoing schema alteration
     */
   }
 };

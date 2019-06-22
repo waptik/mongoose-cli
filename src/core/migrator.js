@@ -1,47 +1,13 @@
 import Umzug from 'umzug';
 import Bluebird from 'bluebird';
-// eslint-disable-next-line no-unused-vars
-import _ from 'lodash';
-import { resolve } from 'path';
-import helpers from '../helpers/index';
-
-// let's get the mongoose package if installed on the user's machine
-const Mongoose = helpers.generic.getMongoose();
-
-export function logMigrator (s) {
-  if (s.indexOf('Executing') !== 0) {
-    helpers.view.log(s);
-  }
-}
-
-function getMongooseInstance () {
-  async () => {
-
-    let config = null;
-
-    try {
-      await helpers.config.init();
-      config = helpers.config.readConf();
-    } catch (e) {
-      helpers.view.error(e);
-    }
-
-    //config = _.defaults(config, { logging: logMigrator });
-
-    try {
-      Mongoose.connect(config.database.url, config.database.options);
-
-      return Mongoose;
-    } catch (e) {
-      helpers.view.error(Object.keys(e));
-    }
-  };
-}
-
-// mongoose instance things related
-const mongoose = getMongooseInstance();
+import helpers from '../helpers/';
 
 export function getMigrator (type, args) {
+
+  const Mongoose = helpers.generic.getMongoose();
+
+  const { models } = require(helpers.config.getModelsIndexFile());
+
   return Bluebird.try(() => {
     if (!(helpers.config.configFileExists() || args.url)) {
       helpers.view.error(
@@ -51,45 +17,40 @@ export function getMigrator (type, args) {
       );
       process.exit(1);
     }
+    const sOptions = {};
+    sOptions.connection = Mongoose.connection;
 
-    const migrator = connection => {
-      const sOptions = {};
-      sOptions.connection = connection;
-      new Umzug({
-        storage: resolve(__dirname, 'storage'),
-        storageOptions: helpers.umzug.getStorageOptions(type, sOptions),
-        logging: helpers.view.log,
-        migrations: {
-          params: [connection, Promise],
-          path: helpers.path.getPath(type),
-          pattern: /\.js$/,
-          wrap: fun => {
-            if (fun.length === 3) {
-              return Bluebird.promisify(fun);
-            } else {
-              return fun;
-            }
+    const migrator = new Umzug({
+      storage: helpers.umzug.getStorage(type),
+      storageOptions: helpers.umzug.getStorageOptions(type, sOptions),
+      logging: helpers.view.log,
+      migrations: {
+        params: [models, Mongoose],
+        path: helpers.path.getPath(type),
+        pattern: /\.js$/,
+        wrap: fun => {
+          if (fun.length === 3) {
+            return Bluebird.promisify(fun);
+          } else {
+            return fun;
           }
         }
-      });
-    };
+      }
+    });
 
-    return mongoose
-      .connection(res => {
-        migrator(res);
-      })
-      .catch(e => {
-        helpers.view.error(e);
-        console.trace(e);
-      });
+    try {
+      return migrator;
+    } catch (e) {
+      helpers.view.error(e);
+    }
   });
 }
 
-export function ensureCurrentMetaSchema (migrator) {
-  const connection = migrator.options.storageOptions.connection.connection;
+export function ensureCollectionSchema (migrator) {
+  const connection = migrator.options.storageOptions.connection;
   const collectionName = migrator.options.storageOptions.collectionName;
 
-  return ensureMetaTable(connection, collectionName)
+  return ensureCollection(connection, collectionName)
     .then(collection => {
       const fields = Object.keys(collection);
 
@@ -100,27 +61,13 @@ export function ensureCurrentMetaSchema (migrator) {
     .catch(() => { });
 }
 
-function ensureMetaTable (connection, collectionName) {
-  const array = [];
+function ensureCollection (connection, collectionName) {
+  return connection.then(() => {
 
-  return connection.then(res => {
-    if (
-      res.db.listCollections().toArray((err, names) => {
-        if (err) {
-          throw new Error(`Something went wrong ${err}`);
-        }
+    if (!connection.collections[collectionName]) {
+      throw new Error(`No migrations collection for ${collectionName} was found.`);
+    }
 
-        names.map(c => {
-          array.push(c.name);
-        });
-
-        console.log('collection names: ', array);
-
-        if (array.indexOf(collectionName) === -1) {
-          throw new Error('No Collection for migraions found.');
-        }
-      })
-    )
-      return;
+    return;
   });
 }

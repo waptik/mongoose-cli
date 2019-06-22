@@ -46,7 +46,7 @@ const api = {
         return api;
       });
   },
-  
+
   getConfigFile () {
     if (args.config) {
       return path.resolve(process.cwd(), args.config);
@@ -56,6 +56,16 @@ const api = {
     const alternativePath = defaultPath.replace('.json', '.js');
 
     return helpers.path.existsSync(alternativePath) ? alternativePath : defaultPath;
+  },
+
+  getModelsIndexFile () {
+    return path.resolve(process.cwd(), 'models', 'index.js');
+  },
+
+  modelsIndexFileExists () {
+    const Path = path.resolve(process.cwd(), 'models', 'index.js');
+
+    return helpers.path.existsSync(Path);
   },
 
   relativeConfigFile () {
@@ -125,15 +135,15 @@ const api = {
       if (api.rawConfig === undefined) {
         throw new Error(
           'Error reading "' +
-            api.relativeConfigFile() +
-            '". Error: ' + api.error
+          api.relativeConfigFile() +
+          '". Error: ' + api.error
         );
       }
 
       if (typeof api.rawConfig !== 'object') {
         throw new Error(
           'Config must be an object or a promise for an object: ' +
-            api.relativeConfigFile()
+          api.relativeConfigFile()
         );
       }
 
@@ -173,7 +183,7 @@ const api = {
     } catch (e) {
       throw new Error(
         'Error occured when looking for "' +
-          api.relativeConfigFile() + '". Kindly bootstrap the project using "mongoose init" comand.'
+        api.relativeConfigFile() + '". Kindly bootstrap the project using "mongoose init" comand.'
       );
     }
 
@@ -202,7 +212,7 @@ const api = {
       api.rawConfig = api.rawConfig[env];
     }
 
-    
+
     if (api.rawConfig.database.logging && !_.isFunction(api.rawConfig.database.logging)) {
       api.rawConfig.database.logging = console.log;
     }

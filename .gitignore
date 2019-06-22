@@ -11,6 +11,7 @@ lib
 config
 models
 migrations
+seeders
 #src/assets
 
 # Extra files

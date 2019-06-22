@@ -30,7 +30,7 @@ function createFolder (folderName, folder, force) {
         'Successfully created ' + clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '".',
       );
     } else {
-      helpers.view.error(clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '" already exists.');
+      helpers.view.log(clc.blueBright(folderName) + ' folder at "' + clc.blueBright(folder) + '" already exists.');
     }
   } catch (e) {
     helpers.view.error(e);
@@ -40,6 +40,10 @@ function createFolder (folderName, folder, force) {
 const init = {
   createMigrationsFolder: force => {
     createFolder('migrations', helpers.path.getPath('migration'), force);
+  },
+
+  createSeedersFolder: force => {
+    createFolder('seeders', helpers.path.getPath('seeder'), force);
   },
 
   createModelsFolder: force => {
@@ -55,7 +59,7 @@ const init = {
     } else if (helpers.path.existsSync(indexPath) && !force) {
       helpers.view.notifyAboutExistingFile(indexPath);
     } else {
-      
+
       const relativeConfigPath = path.relative(helpers.path.getModelsPath(), helpers.config.getConfigFile());
 
       const renderModelIndex = helpers.template.render(
