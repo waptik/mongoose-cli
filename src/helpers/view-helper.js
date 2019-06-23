@@ -14,7 +14,7 @@ module.exports = {
     ];
 
     this.log();
-    this.log(clc.underline('Mongoosee CLI [' + versions.join(', ') + ']'));
+    this.log(clc.underline.blue('Mongoosee CLI [' + versions.join(', ') + ']'));
     this.log();
   },
 
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   info (message) {
-    this.log(`${clc.underline('INFO:')} ${message}`);
+    this.log(`${clc.underline.blue('INFO:')} ${message}`);
   },
 
   ok (message) {

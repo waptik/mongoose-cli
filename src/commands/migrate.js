@@ -1,5 +1,5 @@
 import { _baseOptions } from '../core/yargs';
-import { getMigrator, ensureCurrentMetaSchema } from '../core/migrator';
+import { getMigrator, ensureCollectionSchema } from '../core/migrator';
 
 import helpers from '../helpers';
 import _ from 'lodash';
@@ -18,7 +18,6 @@ exports.builder = yargs =>
 exports.handler = async function (args) {
   const command = args._[0];
 
-  // legacy, gulp used to do this
   await helpers.config.init();
 
   switch (command) {
@@ -36,7 +35,7 @@ exports.handler = async function (args) {
 function migrate (args) {
   return getMigrator('migration', args)
     .then(migrator => {
-      return ensureCurrentMetaSchema(migrator)
+      return ensureCollectionSchema(migrator)
         .then(() => migrator.pending())
         .then(migrations => {
           const options = {};
@@ -68,7 +67,7 @@ function migrate (args) {
 function migrationStatus (args) {
   return getMigrator('migration', args)
     .then(migrator => {
-      return ensureCurrentMetaSchema(migrator)
+      return ensureCollectionSchema(migrator)
         .then(() => migrator.executed())
         .then(migrations => {
           _.forEach(migrations, migration => {
