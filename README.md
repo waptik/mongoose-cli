@@ -34,7 +34,7 @@
 - [FAQ](#faq)
 - [Documentation](#documentation📓)
 - [Credits](#credits👌)
-- [Licence](#licence)
+- [License](#license)
 
 ## Introduction
 This package, Mongoosejs-cli, is a package for nodejs to help generate and run migrations and seeders for mongoosejs with ease.
