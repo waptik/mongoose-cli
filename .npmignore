@@ -14,12 +14,12 @@ lib-cov
 coverage
 
 node_modules
+src
 config
 models
 migrations
 seeders
 
 
-package-lock.json
 .vscode 
 try.js

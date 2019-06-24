@@ -12,8 +12,6 @@ config
 models
 migrations
 seeders
-#src/assets
 
 # Extra files
-package-lock.json
 try.js
