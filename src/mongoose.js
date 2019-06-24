@@ -35,7 +35,6 @@ const cli = yargs
   .help()
   .version()
   .command('db:migrate', 'Run pending migrations', migrate)
-  .command('db:migrate:schema:timestamps:add', 'Update migration table to have timestamps', migrate)
   .command('db:migrate:status', 'List the status of all migrations', migrate)
   .command('db:migrate:undo', 'Reverts a migration', migrateUndo)
   .command('db:migrate:undo:all', 'Revert all migrations ran', migrateUndoAll)

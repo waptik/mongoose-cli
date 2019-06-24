@@ -83,7 +83,6 @@ mongoose [command]
 
 Commands:
   mongoose db:migrate                        Run pending migrations
-  mongoose db:migrate:schema:timestamps:add  Update migration table to have timestamps
   mongoose db:migrate:status                 List the status of all migrations
   mongoose db:migrate:undo                   Reverts a migration
   mongoose db:migrate:undo:all               Revert all migrations ran
