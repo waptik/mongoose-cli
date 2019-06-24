@@ -1,7 +1,8 @@
 <h1 align="center">Welcome to mongoosejs-cli 👋</h1>
 <p>
-  <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <img src="https://img.shields.io/badge/node-%3E%3D11.0.0-blue.svg" />
+  <a href="https://badge.fury.io/js/mongoosejs-cli">
+    <img alt="npm version" src="https://badge.fury.io/js/mongoosejs-cli.svg" target="_blank" />
+  </a>
   <a href="https://github.com/waptik/mongoose-cli#readme">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
   </a>
