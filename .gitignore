@@ -8,10 +8,6 @@ logs
 # Extra folders
 node_modules
 lib
-config
-models
-migrations
-seeders
 
 # Extra files
 try.js

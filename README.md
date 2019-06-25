@@ -361,7 +361,8 @@ $ mongoose db:seed:all
 ```
 $ mongoose db:seed:undo:all
 ```
-
+## Do you have an example of how the structure of the project look like?
+Yes. Please check the [examples](examples/) folder in this project.
 
 
 ## Documentation📓
