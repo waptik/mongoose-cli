@@ -20,8 +20,11 @@
   </a>
 </p>
 
+[![npm](https://nodei.co/npm/mongoosejs-cli.png)](https://www.npmjs.com/package/mongoosejs-cli)
 
 ### 🏠 [Homepage](https://github.com/waptik/mongoose-cli)
+
+![mongoosejs-cli logo](./.github/images/logo.svg)
 
 ## Table of Contents
 
@@ -361,8 +364,9 @@ $ mongoose db:seed:all
 ```
 $ mongoose db:seed:undo:all
 ```
+
 ## Do you have an example of how the structure of the project look like?
-Yes. Please check the [examples](examples/) folder in this project.
+Yes. Please check the [examples](examples/) folder in this project. Screenshots can also be found [here](./github/images/screenshots)
 
 
 ## Documentation📓

@@ -8,9 +8,11 @@ module.exports = {
 
       Example:
       return models.Test.bulkWrite([
-        insertOne: {
-          document: {
-            name: 'first test'
+        {
+          insertOne: {
+            document: {
+              name: 'first test'
+            }
           }
         }
       ]).then(res => {
@@ -27,9 +29,11 @@ module.exports = {
 
       Example:
       return models.Test.bulkWrite([
-        deleteOne: {
-          filter: {
-            name: 'first test'
+        {
+          deleteOne: {
+            filter: {
+              name: 'first test'
+            }
           }
         }
       ]).then(res => {
