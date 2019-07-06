@@ -4,9 +4,9 @@ import helpers from '../helpers/';
 
 export function getMigrator (type, args) {
 
-  const Mongoose = helpers.generic.getMongoose();
-
   const { models } = require(helpers.config.getModelsIndexFile());
+  const mongoose = require(helpers.config.getModelsIndexFile());
+
 
   return Bluebird.try(() => {
     if (!(helpers.config.configFileExists() || args.url)) {
@@ -18,14 +18,14 @@ export function getMigrator (type, args) {
       process.exit(1);
     }
     const sOptions = {};
-    sOptions.connection = Mongoose.connection;
+    sOptions.connection = mongoose.connection;
 
     const migrator = new Umzug({
       storage: helpers.umzug.getStorage(type),
       storageOptions: helpers.umzug.getStorageOptions(type, sOptions),
       logging: helpers.view.log,
       migrations: {
-        params: [models, Mongoose],
+        params: [models, mongoose],
         path: helpers.path.getPath(type),
         pattern: /\.js$/,
         wrap: fun => {

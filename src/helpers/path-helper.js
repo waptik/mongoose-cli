@@ -90,5 +90,5 @@ module.exports = {
     } else {
       return fs.existsSync(pathToCheck);
     }
-  }
+  },
 };

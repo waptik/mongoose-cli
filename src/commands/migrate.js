@@ -64,7 +64,8 @@ function migrate (args) {
     .catch(e => helpers.view.error(e));
 }
 
-function migrationStatus (args) {
+function migrationStatus (args) {helpers.view.info('Migrations Status\n--------------------------------------------\n');
+  
   return getMigrator('migration', args)
     .then(migrator => {
       return ensureCollectionSchema(migrator)

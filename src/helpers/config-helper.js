@@ -59,13 +59,7 @@ const api = {
   },
 
   getModelsIndexFile () {
-    return path.resolve(process.cwd(), 'models', 'index.js');
-  },
-
-  modelsIndexFileExists () {
-    const Path = path.resolve(process.cwd(), 'models', 'index.js');
-
-    return helpers.path.existsSync(Path);
+    return helpers.path.getModelPath('index');
   },
 
   relativeConfigFile () {
@@ -84,17 +78,17 @@ const api = {
             database: {
               url: 'mongodb://localhost/mongoose_dev',
               options: {
-                useNewUrlParser: true
-              }
-            }
+                useNewUrlParser: true,
+              },
+            },
           },
           test: {
             database: {
               url: 'mongodb://localhost/mongoose_test',
               options: {
-                useNewUrlParser: true
-              }
-            }
+                useNewUrlParser: true,
+              },
+            },
           },
           production: {
             database: {
@@ -105,18 +99,17 @@ const api = {
               host: 'localhost',
               port: '',
               options: {
-                useNewUrlParser: true
+                useNewUrlParser: true,
                 //dbName: "" // uncomment this line if you use something like mongo atlas
-              }
-            }
-          }
+              },
+            },
+          },
         },
         undefined,
         2,
       ) + '\n'
     );
   },
-
 
   writeDefaultConfig () {
     const configPath = path.dirname(api.getConfigFile());
@@ -133,18 +126,11 @@ const api = {
       const env = helpers.generic.getEnvironment();
 
       if (api.rawConfig === undefined) {
-        throw new Error(
-          'Error reading "' +
-          api.relativeConfigFile() +
-          '". Error: ' + api.error
-        );
+        throw new Error('Error reading "' + api.relativeConfigFile() + '". Error: ' + api.error);
       }
 
       if (typeof api.rawConfig !== 'object') {
-        throw new Error(
-          'Config must be an object or a promise for an object: ' +
-          api.relativeConfigFile()
-        );
+        throw new Error('Config must be an object or a promise for an object: ' + api.relativeConfigFile());
       }
 
       if (args.url) {
@@ -174,34 +160,26 @@ const api = {
     return api.config;
   },
 
-
   readConf () {
-
     try {
       api.config = require(api.getConfigFile());
       api.rawConfig = api.config;
     } catch (e) {
       throw new Error(
         'Error occured when looking for "' +
-        api.relativeConfigFile() + '". Kindly bootstrap the project using "mongoose init" comand.'
+          api.relativeConfigFile() +
+          '". Kindly bootstrap the project using "mongoose init" comand.',
       );
     }
 
     const env = helpers.generic.getEnvironment();
 
     if (api.rawConfig === undefined) {
-      throw new Error(
-        'Error reading "' +
-        api.relativeConfigFile() +
-        '". Error: ' + api.error
-      );
+      throw new Error('Error reading "' + api.relativeConfigFile() + '". Error: ' + api.error);
     }
 
     if (typeof api.rawConfig !== 'object') {
-      throw new Error(
-        'Config must be an object: ' +
-        api.relativeConfigFile()
-      );
+      throw new Error('Config must be an object: ' + api.relativeConfigFile());
     }
 
     helpers.view.log('Loaded configuration file "' + api.relativeConfigFile() + '".');
@@ -212,11 +190,9 @@ const api = {
       api.rawConfig = api.rawConfig[env];
     }
 
-
     if (api.rawConfig.database.logging && !_.isFunction(api.rawConfig.database.logging)) {
       api.rawConfig.database.logging = console.log;
     }
-
 
     // in case url is present - we overwrite the configuration
     if (api.rawConfig.database.url) {
@@ -239,13 +215,13 @@ const api = {
         host: urlParts.hostname,
         port: urlParts.port ? urlParts.port : '27017',
         protocol: urlParts.protocol.replace(/:$/, ''),
-        ssl: urlParts.query ? urlParts.query.indexOf('ssl=true') >= 0 : false
+        ssl: urlParts.query ? urlParts.query.indexOf('ssl=true') >= 0 : false,
       };
 
       if (urlParts.auth) {
         result = _.assign(result, {
           username: urlParts.auth.split(':')[0],
-          password: urlParts.auth.split(':')[1]
+          password: urlParts.auth.split(':')[1],
         });
       }
 
@@ -257,7 +233,7 @@ const api = {
 
   parseDbUrl (urlString) {
     return api.urlStringToConfigHash(urlString);
-  }
+  },
 };
 
 module.exports = api;

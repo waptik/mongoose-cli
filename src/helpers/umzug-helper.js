@@ -42,6 +42,8 @@ module.exports = {
       options.path = this.getStoragePath(type);
     } else if (this.getStorage(type) === 'mongodb') {
       options.collectionName = this.getCollectionName(type);
+    } else {
+      options.collectionName = this.getCollectionName(type);
     }
 
     _.assign(options, extraOptions);

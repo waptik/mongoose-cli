@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 1.0.4 - 6th, Jul, 2019
+### Removed
+- storage.js from ./src/core
+
+### Fixed
+- unable to find models/index.js when using settings from {cwd}/.mongooserc
+
 ## 1.0.3 - 28th, Jun, 2019
 ### Fixed
 - The omitted {} in the commented examples of ./src/assets/seeders skeleton.
