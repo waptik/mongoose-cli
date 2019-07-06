@@ -1,6 +1,6 @@
 {
   "name": "mongoosejs-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A command line interface (CLI) for Mongoose to generate models and migrations ith ease.",
   "bin": {
     "mongoose": "./lib/mongoose"
