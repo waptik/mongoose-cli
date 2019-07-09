@@ -41,7 +41,7 @@
     "cli-color": "^1.4.0",
     "fs-extra": "^8.0.1",
     "js-beautify": "^1.10.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "resolve": "^1.11.0",
     "umzug": "^2.2.0",
     "yargs": "^13.2.4"
