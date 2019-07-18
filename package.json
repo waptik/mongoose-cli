@@ -40,7 +40,7 @@
     "bluebird": "^3.5.5",
     "cli-color": "^1.4.0",
     "fs-extra": "^8.0.1",
-    "js-beautify": "^1.10.0",
+    "js-beautify": "^1.10.1",
     "lodash": "^4.17.11",
     "resolve": "^1.11.0",
     "umzug": "^2.2.0",
