@@ -148,7 +148,7 @@ touch .mongooserc
  or 
 
  ```sh
-touch mongooserc.json
+touch .mongooserc
  ```
 
 and paste the following code inside the new created file
@@ -366,7 +366,7 @@ $ mongoose db:seed:undo:all
 ```
 
 ## Do you have an example of how the structure of the project look like?
-Yes. Please check the [examples](examples/) folder in this project. Screenshots can also be found [here](./github/images/screenshots)
+Yes. Please check the [examples](examples/) folder in this project. Screenshots can also be found [here](./.github/images/screenshots)
 
 
 ## Documentation📓
