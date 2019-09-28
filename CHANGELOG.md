@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 1.0.5 - 28th, Sep, 2019
+### Changed
+- docs(README.md): fixed typos, and replaced examples methods from global usage to local(project based) using npx. Fixed links related to Github generated links to display full-path of links in npmjs' website.
+
 ## 1.0.4 - 6th, Jul, 2019
 ### Removed
 - storage.js from ./src/core
@@ -25,7 +29,7 @@ All notable changes to this project will be documented in this file.
 ## 1.0.1 - 25th, Jun, 2019
 ### Fixed
 - Seeders, migrations working.
-  
+
 ### Added
 - An in-depth description in the readme file.
 

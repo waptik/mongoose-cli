@@ -26,15 +26,13 @@
     "src/assets"
   ],
   "scripts": {
-    "try": "babel-node try.js",
     "babel": "babel-node",
-    "build": "yarn build-clean && babel src -d lib && yarn build-bin && yarn build-assets",
+    "build": "npm run build-clean && babel src -d lib && npm run build-bin && npm run build-assets",
     "build-bin": "mv ./lib/mongoose.js ./lib/mongoose && chmod +x ./lib/mongoose",
     "build-assets": "cp -R ./src/assets ./lib/",
     "build-clean": "rm -rf ./lib/",
     "lint": "eslint test src --quiet --fix",
-    "test:report": "jest",
-    "test": "yarn lint && yarn build && yarn test:report"
+    "test": "npm run lint && npm run build"
   },
   "dependencies": {
     "bluebird": "^3.5.5",
@@ -54,14 +52,12 @@
     "babel-register": "^6.26.0",
     "eslint": "^6.0.0",
     "husky": "^3.0.1",
-    "jest": "^24.8.0",
     "lint-staged": "^9.2.1",
     "mongoose": "^5.5.12",
-    "node-emoji": "^1.10.0",
     "prettier": "^1.17.1"
   },
   "engines": {
-    "node": ">=11.0.0"
+    "node": ">=6.0.0"
   },
   "husky": {
     "hooks": {

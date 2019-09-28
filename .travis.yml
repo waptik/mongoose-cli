@@ -1,16 +1,26 @@
-sudo: true
-dist: trusty
-
 language: node_js
-node_js: 11
-
+node_js:
+  - '11'
 cache: yarn
-
 install:
-  - npm install -g yarn
   - yarn
-  - yarn add mongoose
-  - yarn build
-
-script:
-  - yarn test
+jobs:
+  include:
+    - stage: Build and test
+      script:
+        - yarn lint
+        - yarn test
+        - yarn build
+    - stage: npm release
+      script: yarn build
+      deploy:
+        provider: npm
+        email: '$NPM_EMAIL'
+        api_key: '$NPM_API_TOKEN'
+        skip_cleanup: true
+        on:
+          tags: true
+branches:
+  only:
+    - master
+    - /^v[0-9]+.*$/
