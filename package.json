@@ -53,7 +53,7 @@
     "eslint": "^6.0.0",
     "husky": "^4.0.2",
     "lint-staged": "^9.2.1",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.8.12",
     "prettier": "^1.17.1"
   },
   "engines": {
