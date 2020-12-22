@@ -2,6 +2,9 @@
 logs
 *.log
 
+# yarn lock
+*.lock
+
 # Editor files
 .vscode
 
