@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 1.0.7- 22th, Dec, 2020
+### Fixed
+- Remove github actions
+
 ## 1.0.6- 22th, Dec, 2020
 ### Fixed
 - Added `seeders-path` to baseOption in `/src/core/yargs.js`
