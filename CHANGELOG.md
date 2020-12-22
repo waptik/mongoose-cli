@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 1.0.6- 22th, Dec, 2020
+### Fixed
+- Added `seeders-path` to baseOption in `/src/core/yargs.js`
+
 ## 1.0.5 - 28th, Sep, 2019
 ### Changed
 - docs(README.md): fixed typos, and replaced examples methods from global usage to local(project based) using npx. Fixed links related to Github generated links to display full-path of links in npmjs' website.
