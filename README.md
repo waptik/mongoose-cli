@@ -116,7 +116,7 @@ Options:
 
 ### To initialize the project
 
-We recommend that after viewing the lis of commands, first thing to do, is to generate the required files and directories needed to get started. It can achieved by entering the following command.
+We recommend that after viewing the list of commands, first thing to do, is to generate the required files and directories needed to get started. It can achieved by entering the following command.
 
 ```sh
 npx mongoosejs-cli init
